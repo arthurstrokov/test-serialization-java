@@ -2,9 +2,7 @@ package com.gmail.arthurstrokov.serialization;
 
 import com.gmail.arthurstrokov.serialization.model.Person;
 import com.gmail.arthurstrokov.serialization.service.JsonConverter;
-import com.gmail.arthurstrokov.serialization.util.PersonUtil;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.gmail.arthurstrokov.serialization.util.PersonCreateUtil;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,10 +21,7 @@ public class DemoApplication {
     @Bean
     CommandLineRunner commandLineRunner() {
         return args -> {
-            Person person = PersonUtil.createPerson();
-
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            System.out.println(gson.toJson(person));
+            Person person = PersonCreateUtil.createPerson();
 
             String convert = JsonConverter.convert(person, false);
             System.out.println(convert);

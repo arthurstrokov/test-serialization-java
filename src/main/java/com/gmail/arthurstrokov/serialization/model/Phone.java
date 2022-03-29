@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Address {
-    private String street;
-    private Phone[] phones;
+public class Phone {
+    private String type;
+    private Long number;
 }

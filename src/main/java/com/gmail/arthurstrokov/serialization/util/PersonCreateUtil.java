@@ -3,19 +3,21 @@ package com.gmail.arthurstrokov.serialization.util;
 import com.gmail.arthurstrokov.serialization.model.Address;
 import com.gmail.arthurstrokov.serialization.model.Book;
 import com.gmail.arthurstrokov.serialization.model.Person;
+import com.gmail.arthurstrokov.serialization.model.Phone;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class PersonUtil {
+public class PersonCreateUtil {
 
-    private PersonUtil() {
+    private PersonCreateUtil() {
     }
 
     public static Person createPerson() {
         Person person = new Person();
         Address address = new Address();
         List<Book> books = Arrays.asList(new Book("Java"), new Book("Gradle"));
+        Phone[] phones = new Phone[]{new Phone("home", 80291555376L), new Phone("work", 80172996110L)};
 
         address.setStreet("spring street");
         person.setName("me");
@@ -23,6 +25,7 @@ public class PersonUtil {
         person.setEmail("me@doit.com");
         person.setAddress(address);
         person.setBooks(books);
+        address.setPhones(phones);
         return person;
     }
 }
