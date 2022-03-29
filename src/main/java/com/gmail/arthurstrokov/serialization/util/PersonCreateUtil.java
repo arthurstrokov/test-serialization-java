@@ -20,12 +20,13 @@ public class PersonCreateUtil {
         Phone[] phones = new Phone[]{new Phone("home", 80291555376L), new Phone("work", 80172996110L)};
 
         address.setStreet("spring street");
+        address.setPhones(phones);
+
         person.setName("me");
         person.setAge(21);
         person.setEmail("me@doit.com");
         person.setAddress(address);
         person.setBooks(books);
-        address.setPhones(phones);
         return person;
     }
 }
