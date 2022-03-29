@@ -8,29 +8,31 @@ public class JsonConverter {
     private JsonConverter() {
     }
 
-    public static String objectConverter(Object obj, boolean suppressObjCurlier) throws IllegalArgumentException, IllegalAccessException {
+    public static String convert(Object obj, boolean suppressObjCurlier) throws IllegalArgumentException, IllegalAccessException {
         Class<?> objClass = obj.getClass();
         Field[] fields = objClass.getDeclaredFields();
         StringBuilder json = new StringBuilder(suppressObjCurlier ? "" : "{");
         for (Field field : fields) {
             field.setAccessible(true); // private fields
-            String name = field.getName();
-            Object value = field.get(obj);
-            if (value instanceof String) {
-                json.append("\"").append(name).append("\":\"").append(value).append("\",");
-            } else if (value instanceof List<?>) {
-                json.append("\"").append(name).append("\": [");
+            String fieldName = field.getName();
+            Object fieldValue = field.get(obj);
+            if (fieldValue instanceof String) {
+                json.append("\"").append(fieldName).append("\":\"").append(fieldValue).append("\",");
+            } else if (fieldValue instanceof Integer) {
+                json.append("\"").append(fieldName).append("\":").append(fieldValue).append(",");
+            } else if (fieldValue instanceof List<?>) {
+                json.append("\"").append(fieldName).append("\": [");
                 @SuppressWarnings("unchecked")
-                List<Object> arrList = (List<Object>) value;
+                List<Object> arrList = (List<Object>) fieldValue;
                 for (Object arrListObj : arrList) {
-                    String object = objectConverter(arrListObj, false);
+                    String object = convert(arrListObj, false);
                     json.append(object).append(",");
                 }
                 json = new StringBuilder(removeTrailingComma(String.valueOf(json)));
                 json.append("]");
-            } else {
-                String object = objectConverter(value, false);
-                json.append("\"").append(name).append("\":").append(object).append(",");
+            } else {  // if another object
+                String object = convert(fieldValue, false);
+                json.append("\"").append(fieldName).append("\":").append(object).append(",");
             }
         }
         json = new StringBuilder(removeTrailingComma(String.valueOf(json)));

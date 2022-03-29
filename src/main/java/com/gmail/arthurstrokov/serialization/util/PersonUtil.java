@@ -19,6 +19,7 @@ public class PersonUtil {
 
         address.setStreet("spring street");
         person.setName("me");
+        person.setAge(21);
         person.setEmail("me@doit.com");
         person.setAddress(address);
         person.setBooks(books);

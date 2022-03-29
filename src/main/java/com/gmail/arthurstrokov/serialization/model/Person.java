@@ -11,6 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Person {
     private String name;
+    private Integer age;
     private String email;
     private Address address;
     private List<Book> books;

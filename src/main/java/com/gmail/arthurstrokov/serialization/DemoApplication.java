@@ -28,7 +28,7 @@ public class DemoApplication {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             System.out.println(gson.toJson(person));
 
-            String convert = JsonConverter.objectConverter(person, false);
+            String convert = JsonConverter.convert(person, false);
             System.out.println(convert);
 
             FileWriter fileWriter = new FileWriter("test-convert.json");
