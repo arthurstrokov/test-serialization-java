@@ -5,7 +5,6 @@ import com.gmail.arthurstrokov.serialization.model.Book;
 import com.gmail.arthurstrokov.serialization.model.Person;
 import com.gmail.arthurstrokov.serialization.model.Phone;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class PersonCreateUtil {
@@ -16,7 +15,7 @@ public class PersonCreateUtil {
     public static Person createPerson() {
         Person person = new Person();
         Address address = new Address();
-        List<Book> books = Arrays.asList(new Book("Java"), new Book("Gradle"));
+        List<Book> books = List.of(new Book("Java", 0.12f), new Book("Gradle", 0.01f));
         Phone[] phones = new Phone[]{new Phone("home", 80291555376L), new Phone("work", 80172996110L)};
 
         address.setStreet("spring street");
