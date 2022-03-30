@@ -18,7 +18,7 @@ public class JsonConverter {
             String fieldName = field.getName();
             Object fieldValue = field.get(obj);
 
-            if (fieldValue instanceof String) {
+            if (fieldValue instanceof String || fieldValue instanceof Character) {
                 jsonResult.append("\"").append(fieldName).append("\":\"").append(fieldValue).append("\",");
 
             } else if (fieldValue instanceof Number) {
@@ -29,6 +29,9 @@ public class JsonConverter {
 
             } else if (fieldValue instanceof Map<?, ?>) {
                 jsonResult.append(mapToJson(field.get(obj), field.getName()));
+
+            } else if (fieldValue instanceof Boolean) {
+                jsonResult.append("\"").append(fieldName).append("\":").append(fieldValue).append(",");
 
             } else if (fieldValue.getClass().isArray()) {  // Arrays
                 jsonResult.append(arrayToJson(field.get(obj), field.getName()));

@@ -17,4 +17,5 @@ public class Person {
     private Address address;
     private String email;
     private List<Book> books;
+    private boolean isActive;
 }

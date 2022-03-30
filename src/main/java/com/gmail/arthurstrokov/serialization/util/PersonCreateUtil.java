@@ -31,12 +31,14 @@ public class PersonCreateUtil {
         Map<Short, Double> shortDoubleMap = new HashMap<>();
         shortDoubleMap.put((short) 12, 0.255d);
         address.setShortDoubleMap(shortDoubleMap);
+        address.setCharacter('a');
 
         person.setAge(21);
         person.setName("me");
         person.setAddress(address);
         person.setEmail("me@doit.com");
         person.setBooks(books);
+        person.setActive(true);
         return person;
     }
 }

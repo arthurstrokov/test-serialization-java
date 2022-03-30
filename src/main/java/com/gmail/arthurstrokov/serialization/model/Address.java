@@ -13,4 +13,5 @@ public class Address {
     private String street;
     private Phone[] phones;
     private Map<Short, Double> shortDoubleMap;
+    private Character character;
 }
