@@ -52,12 +52,11 @@ public class JsonConverter {
     private static String mapToJson(Object obj, String fieldName) {
         StringBuilder jsonResult = new StringBuilder();
         jsonResult.append("\"").append(fieldName).append("\": {");
-        @SuppressWarnings("unchecked")
-        Map<Object, Object> map = (Map<Object, Object>) obj;
-        for (Map.Entry<Object, Object> objectObjectEntry : map.entrySet()) {
+        Map<?, ?> map = (Map<?, ?>) obj;
+        for (Map.Entry<?, ?> objectObjectEntry : map.entrySet()) {
             Object value = objectObjectEntry.getValue();
             StringBuilder resultValue = new StringBuilder();
-            if (value instanceof String) {
+            if (value instanceof String) {  // TODO
                 resultValue.append("\"").append(value).append("\"");
             } else {
                 resultValue.append(value);
@@ -73,8 +72,7 @@ public class JsonConverter {
     private static String listToJson(Object obj, String fieldName) throws IllegalAccessException {
         StringBuilder jsonResult = new StringBuilder();
         jsonResult.append("\"").append(fieldName).append("\": [");
-        @SuppressWarnings("unchecked")
-        List<Object> arrList = (List<Object>) obj;
+        List<?> arrList = (List<?>) obj;
         for (Object arrListObj : arrList) {
             String object = convert(arrListObj, false);
             jsonResult.append(object).append(",");
