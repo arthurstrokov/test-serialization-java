@@ -55,7 +55,14 @@ public class JsonConverter {
         @SuppressWarnings("unchecked")
         Map<Object, Object> map = (Map<Object, Object>) obj;
         for (Map.Entry<Object, Object> objectObjectEntry : map.entrySet()) {
-            jsonResult.append("\"").append(objectObjectEntry.getKey()).append("\"").append(":").append("\"").append(objectObjectEntry.getValue()).append("\"");
+            Object value = objectObjectEntry.getValue();
+            StringBuilder resultValue = new StringBuilder();
+            if (value instanceof String) {
+                resultValue.append("\"").append(value).append("\"");
+            } else {
+                resultValue.append(value);
+            }
+            jsonResult.append("\"").append(objectObjectEntry.getKey()).append("\"").append(":").append(resultValue);
             jsonResult.append(",");
         }
         jsonResult.append("}");
