@@ -2,6 +2,7 @@ package com.gmail.arthurstrokov.serialization.service;
 
 import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
 
 public class JsonConverter {
 
@@ -26,6 +27,9 @@ public class JsonConverter {
             } else if (fieldValue instanceof List<?>) {
                 jsonResult.append(listToJson(field.get(obj), field.getName()));
 
+            } else if (fieldValue instanceof Map<?, ?>) {
+                jsonResult.append(mapToJson(field.get(obj), field.getName()));
+
             } else if (fieldValue.getClass().isArray()) {  // Arrays
                 jsonResult.append(arrayToJson(field.get(obj), field.getName()));
 
@@ -33,10 +37,27 @@ public class JsonConverter {
                 String object = convert(fieldValue, false);
                 jsonResult.append("\"").append(fieldName).append("\":").append(object).append(",");
             }
+
             field.setAccessible(false); // private fields
+            jsonResult.append(",");
+            jsonResult = new StringBuilder(removeTrailingComma(String.valueOf(jsonResult)));
         }
         jsonResult = new StringBuilder(removeTrailingComma(String.valueOf(jsonResult)));
         return jsonResult + (suppressObjCurlier ? "" : "}");
+    }
+
+    private static String mapToJson(Object obj, String fieldName) {
+        StringBuilder jsonResult = new StringBuilder();
+        jsonResult.append("\"").append(fieldName).append("\": {");
+        @SuppressWarnings("unchecked")
+        Map<Object, Object> map = (Map<Object, Object>) obj;
+        for (Map.Entry<Object, Object> objectObjectEntry : map.entrySet()) {
+            jsonResult.append("\"").append(objectObjectEntry.getKey()).append("\"").append(":").append("\"").append(objectObjectEntry.getValue()).append("\"");
+            jsonResult.append(",");
+        }
+        jsonResult.append("}");
+        jsonResult.append(",");
+        return jsonResult.toString();
     }
 
     private static String listToJson(Object obj, String fieldName) throws IllegalAccessException {
@@ -48,8 +69,8 @@ public class JsonConverter {
             String object = convert(arrListObj, false);
             jsonResult.append(object).append(",");
         }
-        jsonResult = new StringBuilder(removeTrailingComma(String.valueOf(jsonResult)));
         jsonResult.append("]");
+        jsonResult.append(",");
         return jsonResult.toString();
     }
 
@@ -61,8 +82,8 @@ public class JsonConverter {
             String object = convert(arrListObj, false);
             jsonResult.append(object).append(",");
         }
-        jsonResult = new StringBuilder(removeTrailingComma(String.valueOf(jsonResult)));
         jsonResult.append("]");
+        jsonResult.append(",");
         return jsonResult.toString();
     }
 

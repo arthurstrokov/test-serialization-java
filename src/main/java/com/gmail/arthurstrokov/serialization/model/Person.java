@@ -5,14 +5,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Map;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Person {
     private String name;
+    private Map<String, Integer> map;
     private Integer age;
-    private String email;
     private Address address;
+    private String email;
     private List<Book> books;
 }
