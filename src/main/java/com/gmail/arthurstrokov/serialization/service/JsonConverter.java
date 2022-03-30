@@ -20,7 +20,7 @@ public class JsonConverter {
             if (fieldValue instanceof String) {
                 jsonResult.append("\"").append(fieldName).append("\":\"").append(fieldValue).append("\",");
 
-            } else if (fieldValue instanceof Integer || fieldValue instanceof Long || fieldValue instanceof Float) {
+            } else if (fieldValue instanceof Number) {
                 jsonResult.append("\"").append(fieldName).append("\":").append(fieldValue).append(",");
 
             } else if (fieldValue instanceof List<?>) {
