@@ -24,7 +24,7 @@ public class JsonConverter {
             if (fieldValue instanceof String || fieldValue instanceof Character) {
                 jsonResult.append("\"").append(fieldName).append("\":\"").append(fieldValue).append("\",");
 
-            } else if (fieldValue instanceof Number) {
+            } else if (fieldValue instanceof Number || fieldValue instanceof Boolean) {
                 jsonResult.append("\"").append(fieldName).append("\":").append(fieldValue).append(",");
 
             } else if (fieldValue instanceof List<?>) {
@@ -32,9 +32,6 @@ public class JsonConverter {
 
             } else if (fieldValue instanceof Map<?, ?>) {
                 jsonResult.append(mapToJson(field.get(obj), field.getName()));
-
-            } else if (fieldValue instanceof Boolean) {
-                jsonResult.append("\"").append(fieldName).append("\":").append(fieldValue).append(",");
 
             } else if (fieldValue.getClass().isArray()) {  // Arrays
                 jsonResult.append(arrayToJson(field.get(obj), field.getName()));
