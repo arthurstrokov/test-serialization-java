@@ -64,11 +64,10 @@ public class JsonConverter {
             } else {
                 resultValue.append(value);
             }
-            jsonResult.append("\"").append(objectObjectEntry.getKey()).append("\"").append(":").append(resultValue);
-            jsonResult.append(",");
+            jsonResult.append("\"").append(objectObjectEntry.getKey()).append("\"").append(":").append(resultValue).append(",");
         }
-        jsonResult.append("}");
-        jsonResult.append(",");
+        jsonResult = new StringBuilder(removeTrailingComma(String.valueOf(jsonResult)));
+        jsonResult.append("},");
         return jsonResult.toString();
     }
 
@@ -80,8 +79,8 @@ public class JsonConverter {
             String object = convert(arrListObj, false);
             jsonResult.append(object).append(",");
         }
-        jsonResult.append("]");
-        jsonResult.append(",");
+        jsonResult = new StringBuilder(removeTrailingComma(String.valueOf(jsonResult)));
+        jsonResult.append("],");
         return jsonResult.toString();
     }
 
@@ -93,8 +92,8 @@ public class JsonConverter {
             String object = convert(arrListObj, false);
             jsonResult.append(object).append(",");
         }
-        jsonResult.append("]");
-        jsonResult.append(",");
+        jsonResult = new StringBuilder(removeTrailingComma(String.valueOf(jsonResult)));
+        jsonResult.append("],");
         return jsonResult.toString();
     }
 
