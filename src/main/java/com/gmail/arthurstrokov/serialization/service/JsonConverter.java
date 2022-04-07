@@ -18,6 +18,9 @@ public class JsonConverter {
             String fieldName = field.getName();
             Object fieldValue = field.get(obj);
 
+            if (fieldValue == null) {
+                continue;
+            }
             if (fieldValue instanceof String || fieldValue instanceof Character) {
                 jsonResult.append("\"").append(fieldName).append("\":\"").append(fieldValue).append("\",");
 
